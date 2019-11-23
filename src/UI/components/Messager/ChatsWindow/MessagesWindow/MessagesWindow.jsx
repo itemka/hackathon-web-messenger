@@ -1,10 +1,15 @@
 import React from 'react';
+import {Message} from "./Message/Message";
 
-export class MessagesWindow extends React.Component {
-    render() {
+class MessagesWindow extends React.Component {
+    render = () => {
+        let messages = this.props.messageArray.map(item => <Message data={item.data}/>);
         return (
-            <div>
-            </div>
-        )
+            <>
+                {messages}
+            </>
+        );
     }
 }
+
+export default MessagesWindow;

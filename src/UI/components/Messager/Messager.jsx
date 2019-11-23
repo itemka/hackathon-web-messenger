@@ -1,6 +1,7 @@
 import React from 'react';
 import css from './Messager.module.css';
-import {ChatsWindow} from "./ChatsWindow/ChatsWindow";
+
+import ChatsWindow from "./ChatsWindow/ChatsWindow";
 import {ChatsList} from "./ChatsList/ChatsList";
 
 export class Messager extends React.Component {

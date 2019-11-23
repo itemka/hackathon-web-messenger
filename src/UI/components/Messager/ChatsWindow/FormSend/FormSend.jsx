@@ -8,7 +8,7 @@ export class FormSend extends React.Component {
             <div className={`${css.FormSend} clearFix`}>
                 <textarea className={`${css.inputMessages}`} name={"newMessage"} rows={2}
                           placeholder={'Enter Messages Text...'}/>
-                <button className={css.buttonSendMessages}>Send</button>
+                <button className={css.buttonSendMessages} onClick={()=>this.props.addNewMessage(`fdsdgs`)}>Send</button>
             </div>
         )
     }
