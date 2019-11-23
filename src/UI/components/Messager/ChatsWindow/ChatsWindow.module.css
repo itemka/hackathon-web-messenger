@@ -1,12 +1,12 @@
 .MessagesWindow {
-    /*overflow-y: scroll; !*for scroll*!*/
-    background-color: lightsalmon;
+    overflow-y: scroll; /*for scroll*/
     height: 530px;
     margin-bottom: 5px;
     margin-top: 5px;
+    border: 1px solid white;
 }
 
 .FormSend {
-    background-color: lightblue;
+    border: 1px solid white;
     height: 100px;
 }

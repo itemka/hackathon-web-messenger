@@ -4,7 +4,7 @@ export class MessagesWindow extends React.Component {
     render() {
         return (
             <div>
-                MessagesWindow
+
             </div>
         )
     }
