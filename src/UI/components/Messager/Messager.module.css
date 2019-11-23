@@ -2,11 +2,11 @@
     width: 80%;
     margin: 10px 0 30px 50px;
     padding: 10px;
-    border-radius: 3px;
     background-color: rgba(66, 66, 66, 0.9);
     height: fit-content;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 15px 15px rgba(0, 0, 0, 0.22);
     border: 1px solid white;
+    border-radius: 5px;
 }
 
 .titleMessager {
@@ -30,6 +30,7 @@
     width: 450px;
     overflow: auto;
     border: 1px solid white;
+    border-radius: 5px;
 }
 
 .ChatsWindow {
@@ -42,4 +43,5 @@
     overflow: auto;
     margin: 0 10px;
     padding: 0 5px;
+    border-radius: 5px;
 }

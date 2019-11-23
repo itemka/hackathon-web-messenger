@@ -7,7 +7,7 @@ background-color: rgb(51, 75, 122)
    display: flex;
    flex-direction:row; 
    justify-content: center;
-   initial-letter: center;
+
    color:white;
    border-bottom:1px solid rgb(47, 88, 189);
                         

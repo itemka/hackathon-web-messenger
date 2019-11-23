@@ -8,10 +8,11 @@ import {api} from "../../../DAL/API";
 import openSocket from 'socket.io-client'
 
 export class Messager extends React.Component {
+    messagesArray = [];
     state = {
         chatsArray: [],
         messagesArray: [],
-        interlocutorIdAfterClickOnChat: 'no',
+        interlocutorIdAfterClickOnChat: 0,
     };
     socket = '';
 
@@ -25,7 +26,6 @@ export class Messager extends React.Component {
         }
         this.socket = await openSocket('http://messenger-hackathon.herokuapp.com', {query: "token=" + localStorage.getItem("token")});
         if (this.socket !== '') {
-
             this.socket.emit('get-chats', {token: token});
             this.socket.on('get-chats-success', (data) => {
                 // console.log(data)
@@ -39,57 +39,56 @@ export class Messager extends React.Component {
             user => {
                 this.socket.emit('init-chat', {token: localStorage.getItem('token'), interlocutorId: user.id});
                 this.socket.on('init-chat-success', (chat) => {
-                        const newChat = chat.chat;
+                        console.log(chat);
+                        let newChat = chat;
                         this.setState({
-                            chatsArray: [newChat, ...this.state.chatsArray]
+                            chatsArray: [...this.state.chatsArray, ...newChat]
                         });
                     }
                 )
             }
         )
-    }
+    };
 
-    getMessages = (interlocutorId, page = 1) => {
-        // console.log(interlocutorId)
+    getMessages = async (interlocutorId, page = 3) => {
+        // console.log(`interlocutorId = ${interlocutorId}`);
+        await this.setState({interlocutorIdAfterClickOnChat: interlocutorId});
         if (this.socket !== '') {
-            this.socket.emit('get-messages', {
+            await this.socket.emit('get-messages', {
                 token: localStorage.getItem('token'),
                 interlocutorId: interlocutorId,
                 page: page
             });
-            this.socket.on('get-messages-success', (messages) => {
-                console.log(messages);
-                this.setState({
-                    messagesArray: [...messages.messages.messages],
-                    interlocutorIdAfterClickOnChat: interlocutorId
-                });
+            await this.socket.on('get-messages-success', (messages) => {
+                console.log(`messages.messages.messages = `);
+                console.log(messages.messages.messages);
+                this.setState({messagesArray: messages.messages.messages});
             });
+            // console.log(`interlocutorId = ${this.state.interlocutorIdAfterClickOnChat}`);
         }
     };
 
-
     sendMessage = async (interlocutorId, messageText) => {
-        this.setState({interlocutorIdAfterClickOnChat: interlocutorId});
-        this.socket.emit('send-message', {
+        await this.socket.emit('send-message', {
             token: localStorage.getItem('token'),
             interlocutorId: interlocutorId,
             body: messageText
         });
-        this.socket.on('send-message-success', (messages) => {
-            // console.log(data);
-            this.setState({messagesArray: [...messages.messages.messages]});
+        await this.socket.on('send-message-success', (messages) => {
+            console.log(`qqqqqqqqqq`);
+            console.log(messages.message);
+            this.setState({messagesArray: [messages.message, ...this.state.messagesArray]});
         });
     };
 
     render() {
         return (
-
             <div className={css.Messager}>
 
                 <div className={css.titleMessager}>Messager</div>
 
                 <div className={css.ChatsListAndChatsWindow}>
-                    <div className={css.ChatsList}><ChatsList chats={this.state.chatsArray}
+                    <div className={css.ChatsList}><ChatsList chatsArray={this.state.chatsArray}
                                                               getMessages={this.getMessages}
                                                               getUser={this.getUser}
 

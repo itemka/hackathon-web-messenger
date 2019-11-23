@@ -9,10 +9,12 @@ export class FormSend extends React.Component {
     addNewTextToTextarea = (e) => {
         this.setState({areaText: e.currentTarget.value})
     };
+    sendMessage = () => {
+        this.props.sendMessage(this.props.interlocutorIdAfterClickOnChat, this.state.areaText)
+    };
 
     onKeyPress = (e) => {
-        if (e.key === 'Enter') this.props.sendMessage(this.props.interlocutorIdAfterClickOnChat, this.state.areaText);
-        console.log(this.props.interlocutorIdAfterClickOnChat);
+        if (e.key === 'Enter') this.sendMessage();
     };
 
     render() {
@@ -26,7 +28,7 @@ export class FormSend extends React.Component {
                           placeholder={'Enter Messages Text...'}
                           onKeyPress={this.onKeyPress}/>
                 <button className={css.buttonSendMessages}
-                        onClick={() => this.props.addNewMessage(this.state.areaText)}>Send
+                        onClick={() => this.sendMessage()}>Send
                 </button>
             </div>
         )

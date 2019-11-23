@@ -24,8 +24,10 @@ export class ChatsList extends React.Component {
     };
 
     render() {
-        console.log(this.props.chats)
-        let chats = this.props.chats.map(chat => <div key={chat.id}>
+        // console.log(`00000000000000000000000000000`);
+        // console.log(this.props.chatsArray);
+        // console.log(`11111111111111111111111111111`);
+        let chats = this.props.chatsArray.map(chat => <div key={Math.random()}>
             <Chat chat={chat} getMessages={this.getMessages}/>
         </div>);
 

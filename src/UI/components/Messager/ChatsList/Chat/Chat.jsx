@@ -7,7 +7,7 @@ export class Chat extends React.Component {
 
         let {id, interlocutor, lastMessage} = this.props.chat;
         return (
-            <div className={css.wraperChat} key={id} onClick={() => this.props.getMessages(interlocutor._id)}>
+            <div className={css.wraperChat} key={id} onClick={() => this.props.getMessages(interlocutor.id)}>
                 <div className={css.Chat}>
                     <div className={css.PhotoUser}>
                         <img src={interlocutor.photo} alt='Name'/>

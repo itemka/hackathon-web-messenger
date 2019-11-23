@@ -8,8 +8,8 @@ export const Message = (props) => {
             <div><img src={``} alt="image"/></div>
             <div className={css.dataMessage}>
 
-                <div className={css.nameMenMessage}> {`Man`} </div>
-                <div className={css.textMessage}>{props.data}</div>
+                <div className={css.nameMenMessage}> {`User:${props.interlocutorId} | ${props.data} | ${props.isRead}`} </div>
+                <div className={css.textMessage}>{props.body}</div>
 
             </div>
 
