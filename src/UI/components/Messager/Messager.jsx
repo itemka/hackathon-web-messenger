@@ -24,7 +24,6 @@ export class Messager extends React.Component {
             this.socket.emit('get-chats', {token: token});
             this.socket.on('get-chats-success', (data) => {
                 this.setState({chatsArray: [...data.chats]});
-                console.log(data.chats)
             });
         }
     }
@@ -37,24 +36,38 @@ export class Messager extends React.Component {
 
     };
 
-    getUser= (userName)=>{
-
-    };
-
-    render() {
-        console.log(this.state)
-        return (
-            <div className={css.Messager}>
-
-                <div className={css.titleMessager}>Messager</div>
-
-                <div className={css.ChatsListAndChatsWindow}>
-                    <div className={css.ChatsList}><ChatsList chats={this.state.chatsArray}
-                                                              getMessages={this.getMessages}/></div>
-                    <div className={css.ChatsWindow}><ChatsWindow/></div>
-                </div>
-
-            </div>
+    getUser = async (userName) => {
+        await api.getUsers(1, 10, userName).then(
+            user => {
+                this.socket.emit('init-chat', {token: localStorage.getItem('token'), interlocutorId: user.id});
+                this.socket.on('init-chat-success', (chat) => {
+                        const newChat = chat.chat
+                        this.setState({
+                            chatsArray: [newChat, ...this.state.chatsArray]
+                        });
+                    }
+                )
+            }
         )
     }
-}
+
+        render()
+        {
+            return (
+                <div className={css.Messager}>
+
+                    <div className={css.titleMessager}>Messager</div>
+
+                    <div className={css.ChatsListAndChatsWindow}>
+                        <div className={css.ChatsList}><ChatsList chats={this.state.chatsArray}
+                                                                  getMessages={this.getMessages}
+                                                                  getUser={this.getUser}
+
+                        /></div>
+                        <div className={css.ChatsWindow}><ChatsWindow/></div>
+                    </div>
+
+                </div>
+            )
+        }
+    }

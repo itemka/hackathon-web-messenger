@@ -14,34 +14,8 @@ export class ChatsList extends React.Component {
 
     state = {
         areaText: '',
-        chats: [{
-            id: 'klklk',
-            userId: 'jjhj',
-            interlocutor: {
-                id: 'hjhjhj',
-                name: 'марина',
-                photo: 'http://s1.iconbird.com/ico/2013/12/505/w450h4001385925286User.png',
-                visitDate: '12.12.2019'
-            },
-            newMessagesCount: 766,
-            lastMessage: "how are you",
-            isHidden: false
-        },
-            {
-                id: 'jhjjh',
-                userId: 'jhjhjk',
-                interlocutor: {
-                    id: 'hjhjhj',
-                    name: 'Сургей',
-                    photo: 'http://s1.iconbird.com/ico/2013/12/505/w450h4001385925286User.png',
-                    visitDate: '15.01.2019'
-                },
-                newMessagesCount: 111,
-                lastMessage: 'ты офигел',
-                isHidden: false
-
-            }]
     };
+
     addNewTextToTextarea = (e) => {
         this.setState({areaText: e.currentTarget.value})
     };
@@ -51,8 +25,8 @@ export class ChatsList extends React.Component {
     };
 
     render() {
-        console.log(this.props.chats);
-        let chats = this.state.chats.map(chat => <div key={chat.id}><Chat chat={chat}/></div>);
+        console.log(this.props.chats)
+        let chats = this.props.chats.map(chat => <div key={chat.id}><Chat chat={chat}/></div>);
 
         return (
             <div>
