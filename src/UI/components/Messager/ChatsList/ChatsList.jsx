@@ -7,10 +7,9 @@ import css from "./ChatsList.module.css";
 export class ChatsList extends React.Component {
     // props.chats
     //props.getMessages
-    getMessages(id) {
-        console.log(id)
-        //this.props.getMessages(id)
-    }
+    getMessages = (interlocutorId) => {
+        this.props.getMessages(interlocutorId);
+    };
 
     state = {
         areaText: '',
@@ -26,7 +25,9 @@ export class ChatsList extends React.Component {
 
     render() {
         console.log(this.props.chats)
-        let chats = this.props.chats.map(chat => <div key={chat.id}><Chat chat={chat}/></div>);
+        let chats = this.props.chats.map(chat => <div key={chat.id}>
+            <Chat chat={chat} getMessages={this.getMessages}/>
+        </div>);
 
         return (
             <div>

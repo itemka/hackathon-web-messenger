@@ -5,15 +5,11 @@ import {FormSend} from "./FormSend/FormSend";
 
 class ChatsWindow extends React.Component {
     state = {
-        messageArray: [
-            {
-                chatId: 1, authorId: 4, isRead: false, data: `lkjnbhnkjn`,
-                status: `deletedForSender` | `deleteForRecipient` | `deleteForAll`,
-            },
-            {
-                chatId: 1, authorId: 4, isRead: false, data: `asgasgasfgsafgsa`,
-                status: `deletedForSender` | `deleteForRecipient` | `deleteForAll`,
-            },
+        messageArray: [...this.props.messagesArray
+            // {
+            //     chatId: 1, authorId: 4, isRead: false, data: `lkjnbhnkjn`,
+            //     status: `deletedForSender` | `deleteForRecipient` | `deleteForAll`,
+            // },
         ]
     };
 

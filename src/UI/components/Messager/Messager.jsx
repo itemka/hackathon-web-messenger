@@ -15,11 +15,14 @@ export class Messager extends React.Component {
     socket = '';
 
     async componentDidMount() {
-        let token = await api.getToken();
-        await storage.saveToken(token);
-
+        let token;
+        if (localStorage.getItem('token') == null) {
+            token = await api.getToken();
+            await storage.saveToken(token);
+        } else {
+            token = localStorage.getItem('token');
+        }
         this.socket = await openSocket('http://messenger-hackathon.herokuapp.com', {query: "token=" + localStorage.getItem("token")});
-        ;
         if (this.socket !== '') {
             this.socket.emit('get-chats', {token: token});
             this.socket.on('get-chats-success', (data) => {
@@ -28,12 +31,18 @@ export class Messager extends React.Component {
         }
     }
 
-    getMessages = (chatId) => {
+    getMessages = (interlocutorId, page = 1) => {
         if (this.socket !== '') {
-            this.socket.emit('get-messages', {token: localStorage.getItem('token'), chatId: chatId});
-            this.socket.on('get-messages-success',);
+            this.socket.emit('get-messages', {
+                token: localStorage.getItem('token'),
+                interlocutorId: interlocutorId,
+                page: page
+            });
+            this.socket.on('get-messages-success', (messages) => {
+                console.log(messages.messages.messages);
+                this.setState({messagesArray: [...messages.messages.messages]});
+            });
         }
-
     };
 
     getUser = async (userName) => {
@@ -41,7 +50,7 @@ export class Messager extends React.Component {
             user => {
                 this.socket.emit('init-chat', {token: localStorage.getItem('token'), interlocutorId: user.id});
                 this.socket.on('init-chat-success', (chat) => {
-                        const newChat = chat.chat
+                        const newChat = chat.chat;
                         this.setState({
                             chatsArray: [newChat, ...this.state.chatsArray]
                         });
@@ -51,23 +60,22 @@ export class Messager extends React.Component {
         )
     }
 
-        render()
-        {
-            return (
-                <div className={css.Messager}>
+    render() {
+        return (
+            <div className={css.Messager}>
 
-                    <div className={css.titleMessager}>Messager</div>
+                <div className={css.titleMessager}>Messager</div>
 
-                    <div className={css.ChatsListAndChatsWindow}>
-                        <div className={css.ChatsList}><ChatsList chats={this.state.chatsArray}
-                                                                  getMessages={this.getMessages}
-                                                                  getUser={this.getUser}
+                <div className={css.ChatsListAndChatsWindow}>
+                    <div className={css.ChatsList}><ChatsList chats={this.state.chatsArray}
+                                                              getMessages={this.getMessages}
+                                                              getUser={this.getUser}
 
-                        /></div>
-                        <div className={css.ChatsWindow}><ChatsWindow/></div>
-                    </div>
-
+                    /></div>
+                    <div className={css.ChatsWindow}><ChatsWindow messagesArray={this.state.messagesArray}/></div>
                 </div>
-            )
-        }
+
+            </div>
+        )
     }
+}
