@@ -37,6 +37,10 @@ export class Messager extends React.Component {
 
     };
 
+    getUser= (userName)=>{
+
+    };
+
     render() {
         console.log(this.state)
         return (
