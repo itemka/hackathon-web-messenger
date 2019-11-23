@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import {ChatsList} from "./UI/components/Messager/ChatsList/ChatsList";
+import {Messager} from "./UI/components/Messager/Messager";
 
 function App() {
     return (
         <div className="App">
-            <ChatsList/>
+            <Messager/>
         </div>
     );
 }

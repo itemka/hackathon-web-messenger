@@ -1,10 +1,10 @@
 import React from 'react';
 
-export class Messager extends React.Component {
+export class MessagesWindow extends React.Component {
     render() {
         return (
             <div>
-
+                MessagesWindow
             </div>
         )
     }
