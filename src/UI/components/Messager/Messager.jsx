@@ -17,7 +17,9 @@ export class Messager extends React.Component {
     async componentDidMount() {
         let token = await api.getToken();
         await storage.saveToken(token);
-        this.socket = await openSocket('http://messenger-hackathon.herokuapp.com');
+
+        this.socket = await openSocket('http://messenger-hackathon.herokuapp.com', {query: "token=" + localStorage.getItem("token")});
+        ;
         if (this.socket !== '') {
             this.socket.emit('get-chats', {token: token});
             this.socket.on('get-chats-success', (data) => {
@@ -25,7 +27,6 @@ export class Messager extends React.Component {
                 console.log(data.chats)
             });
         }
-
     }
 
     getMessages = (chatId) => {
