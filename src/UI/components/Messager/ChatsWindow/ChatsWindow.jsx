@@ -14,28 +14,11 @@ class ChatsWindow extends React.Component {
                 chatId: 1, authorId: 4, isRead: false, data: `asgasgasfgsafgsa`,
                 status: `deletedForSender` | `deleteForRecipient` | `deleteForAll`,
             },
-            {
-                chatId: 1, authorId: 4, isRead: false, data: `lknjkhbgvhjkjh`,
-                status: `deletedForSender` | `deleteForRecipient` | `deleteForAll`,
-            },
-            {
-                chatId: 1, authorId: 4, isRead: false, data: `lknjkhbgvhjkjh`,
-                status: `deletedForSender` | `deleteForRecipient` | `deleteForAll`,
-            },
-            {
-                chatId: 1, authorId: 4, isRead: false, data: `lknjkhbgvhjkjh`,
-                status: `deletedForSender` | `deleteForRecipient` | `deleteForAll`,
-            },
-            {
-                chatId: 1, authorId: 4, isRead: false, data: `lknjkhbgvhjkjh`,
-                status: `deletedForSender` | `deleteForRecipient` | `deleteForAll`,
-            },
         ]
     };
 
 
     addNewMessage = (newMessageText) => {
-    debugger
         console.log(this.state.messageArray);
         this.setState({
             messageArray: [...this.state.messageArray, {
@@ -43,7 +26,7 @@ class ChatsWindow extends React.Component {
                 status: `deletedForSender` | `deleteForRecipient` | `deleteForAll`,
             }]
         })
-    }
+    };
 
     render() {
         return (
@@ -52,7 +35,7 @@ class ChatsWindow extends React.Component {
                     <MessagesWindow messageArray={this.state.messageArray}/>
                 </div>
                 <div className={css.FormSend}>
-                    <FormSend addNewMessage={this.addNewMessage}/>
+                    <FormSend addNewMessage={this.addNewMessage.bind(this)}/>
                 </div>
             </div>
         )
