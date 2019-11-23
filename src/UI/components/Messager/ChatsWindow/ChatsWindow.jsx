@@ -18,6 +18,18 @@ class ChatsWindow extends React.Component {
                 chatId: 1, authorId: 4, isRead: false, data: `lknjkhbgvhjkjh`,
                 status: `deletedForSender` | `deleteForRecipient` | `deleteForAll`,
             },
+            {
+                chatId: 1, authorId: 4, isRead: false, data: `lknjkhbgvhjkjh`,
+                status: `deletedForSender` | `deleteForRecipient` | `deleteForAll`,
+            },
+            {
+                chatId: 1, authorId: 4, isRead: false, data: `lknjkhbgvhjkjh`,
+                status: `deletedForSender` | `deleteForRecipient` | `deleteForAll`,
+            },
+            {
+                chatId: 1, authorId: 4, isRead: false, data: `lknjkhbgvhjkjh`,
+                status: `deletedForSender` | `deleteForRecipient` | `deleteForAll`,
+            },
         ]
     };
 
