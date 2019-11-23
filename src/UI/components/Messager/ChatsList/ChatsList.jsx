@@ -4,17 +4,13 @@ import Chat from "./Chat/Chat"
 
 
 export class ChatsList extends React.Component {
-
-    getToken() {
-        return api.getToken().then(data => console.log(data));
-    }
-
+// props.chats
+    //props.getMessages
     render() {
         return (
             <div>
                 <Chat />
                 <Chat />
-                <button onClick={() => this.getToken}>Click</button>
             </div>
         )
     }
