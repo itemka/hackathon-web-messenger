@@ -2,9 +2,12 @@ import React from 'react';
 import css from './Chat.module.css'
 
 export class Chat extends React.Component {
+    
     render() {
+        console.log(this.props.chat)
+        let {id,interlocutor,lastMessage}= this.props.chat
         return (
-            <div className={css.wraperChat}>
+            <div className={css.wraperChat} key={id} >
                 <div className={css.Chat}>
                     <div className={css.PhotoUser}>
                         <img src={'http://s1.iconbird.com/ico/2013/12/505/w450h4001385925286User.png'} alt='Name' />
@@ -12,11 +15,11 @@ export class Chat extends React.Component {
 
                     <div className={css.LocuterNameData}>
                         <div className={css.MessageDate}>
-                            <div className={css.UserName}>ДЕД МОРОЗ</div>
-                            <div>12.11.2019</div>
+                            <div className={css.UserName}>{interlocutor.name}</div>
+                            <div>{interlocutor.visitDate}</div>
                         </div>
                         <div className={css.LastMessage}>
-                            <div className={css.Message}>Привет</div>
+                            <div className={css.Message}>{lastMessage}</div>
                             <div className ={css.NumberMessage}>2</div>
                         </div>
                     </div>
