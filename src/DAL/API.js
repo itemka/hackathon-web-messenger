@@ -12,6 +12,6 @@ const instance = axios.create({
 export const api = {
     getToken: () => instance.post(`auth/get-token`).then(response => {
         // console.log(response)
-        return response
+        return response.data
     }),
 }

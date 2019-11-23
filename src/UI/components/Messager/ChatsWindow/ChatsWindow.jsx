@@ -1,19 +1,50 @@
 import React from 'react';
-import {MessagesWindow} from "./MessagesWindow/MessagesWindow";
-import {FormSend} from "./FormSend/FormSend";
 import css from './ChatsWindow.module.css';
+import MessagesWindow from "./MessagesWindow/MessagesWindow";
+import {FormSend} from "./FormSend/FormSend";
 
-export class ChatsWindow extends React.Component {
+class ChatsWindow extends React.Component {
+    state = {
+        messageArray: [
+            {
+                chatId: 1, authorId: 4, isRead: false, data: `lkjnbhnkjn`,
+                status: `deletedForSender` | `deleteForRecipient` | `deleteForAll`,
+            },
+            {
+                chatId: 1, authorId: 4, isRead: false, data: `asgasgasfgsafgsa`,
+                status: `deletedForSender` | `deleteForRecipient` | `deleteForAll`,
+            },
+            {
+                chatId: 1, authorId: 4, isRead: false, data: `lknjkhbgvhjkjh`,
+                status: `deletedForSender` | `deleteForRecipient` | `deleteForAll`,
+            },
+        ]
+    };
+
+
+    addNewMessage = (newMessageText) => {
+    debugger
+        console.log(this.state.messageArray);
+        this.setState({
+            messageArray: [...this.state.messageArray, {
+                chatId: 1, authorId: 4, isRead: false, data: newMessageText,
+                status: `deletedForSender` | `deleteForRecipient` | `deleteForAll`,
+            }]
+        })
+    }
+
     render() {
         return (
             <div>
                 <div className={css.MessagesWindow}>
-                    <MessagesWindow/>
+                    <MessagesWindow messageArray={this.state.messageArray}/>
                 </div>
                 <div className={css.FormSend}>
-                    <FormSend/>
+                    <FormSend addNewMessage={this.addNewMessage}/>
                 </div>
             </div>
         )
     }
 }
+
+export default ChatsWindow;

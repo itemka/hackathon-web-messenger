@@ -1,13 +1,23 @@
-.Message{
+.Message {
     padding: 10px 0 10px 20px;
-    /*background-color: lightsalmon;*/
+    border: 1px solid white;
+    background-color: #705b45;
+    margin: 10px 5px;
 }
-.Message img{
+
+.clearFix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.Message img {
     width: 50px;
     float: left;
     border-radius: 50%;
 }
-.dataMessage{
+
+.dataMessage {
     float: left;
     margin-left: 0px;
     /*background-color: cadetblue;*/
@@ -17,12 +27,17 @@
     border-radius: 15px;
     /*border: 1px solid dimgray;*/
 }
-.nameMenMessage{
+
+.nameMenMessage {
+    text-align: left;
     font-size: 1.3em;
     font-weight: bold;
     margin-bottom: 5px;
 }
-.textMessage{
+
+.textMessage {
+    color: white;
+    text-align: left;
     /*background-color: darkkhaki;*/
     background-color: rgba(41, 41, 41, 0.8);
     padding: 10px 20px;
@@ -31,9 +46,3 @@
     border-top-right-radius: 20px;
     border: 1px solid dimgray;
 }
-/*.triangleBottomright {*/
-/*    width: 0;*/
-/*    height: 0;*/
-/*    border-bottom: 10px solid red;*/
-/*    border-left: 10px solid transparent;*/
-/*}*/
