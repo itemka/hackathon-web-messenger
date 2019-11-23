@@ -52,7 +52,7 @@ export class ChatsList extends React.Component {
 
     render() {
         console.log(this.props.chats);
-        let chats = this.state.chats.map(chat => <div key={chat.id}><Chat chat={chat}/></div>)
+        let chats = this.state.chats.map(chat => <div key={chat.id}><Chat chat={chat}/></div>);
 
         return (
             <div>
