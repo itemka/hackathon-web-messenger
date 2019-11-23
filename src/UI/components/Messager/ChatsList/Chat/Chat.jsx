@@ -4,9 +4,10 @@ import css from './Chat.module.css'
 export class Chat extends React.Component {
 
     render() {
+
         let {id, interlocutor, lastMessage} = this.props.chat;
         return (
-            <div className={css.wraperChat} key={id} onClick={() => this.props.getMessages(interlocutor.id)}>
+            <div className={css.wraperChat} key={id} onClick={() => this.props.getMessages(interlocutor._id)}>
                 <div className={css.Chat}>
                     <div className={css.PhotoUser}>
                         <img src={interlocutor.photo} alt='Name'/>
@@ -17,10 +18,12 @@ export class Chat extends React.Component {
                             <div className={css.UserName}>{interlocutor.name}</div>
                             <div>{interlocutor.visitDate}</div>
                         </div>
-                        <div className={css.LastMessage}>
-                            <div className={css.Message}>{lastMessage}</div>
-                            <div className={css.NumberMessage}>2</div>
-                        </div>
+                        {lastMessage !== null
+                            ? <div className={css.LastMessage}>
+                                <div className={css.Message}>{lastMessage.body}</div>
+                                <div className={css.NumberMessage}>2</div>
+                            </div>
+                            : <></>}
                     </div>
 
                 </div>

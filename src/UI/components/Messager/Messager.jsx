@@ -11,6 +11,7 @@ export class Messager extends React.Component {
     state = {
         chatsArray: [],
         messagesArray: [],
+        interlocutorIdAfterClickOnChat: 'no',
     };
     socket = '';
 
@@ -24,26 +25,14 @@ export class Messager extends React.Component {
         }
         this.socket = await openSocket('http://messenger-hackathon.herokuapp.com', {query: "token=" + localStorage.getItem("token")});
         if (this.socket !== '') {
+
             this.socket.emit('get-chats', {token: token});
             this.socket.on('get-chats-success', (data) => {
+                // console.log(data)
                 this.setState({chatsArray: [...data.chats]});
             });
         }
     }
-
-    getMessages = (interlocutorId, page = 1) => {
-        if (this.socket !== '') {
-            this.socket.emit('get-messages', {
-                token: localStorage.getItem('token'),
-                interlocutorId: interlocutorId,
-                page: page
-            });
-            this.socket.on('get-messages-success', (messages) => {
-                console.log(messages.messages.messages);
-                this.setState({messagesArray: [...messages.messages.messages]});
-            });
-        }
-    };
 
     getUser = async (userName) => {
         await api.getUsers(1, 10, userName).then(
@@ -60,8 +49,41 @@ export class Messager extends React.Component {
         )
     }
 
+    getMessages = (interlocutorId, page = 1) => {
+        // console.log(interlocutorId)
+        if (this.socket !== '') {
+            this.socket.emit('get-messages', {
+                token: localStorage.getItem('token'),
+                interlocutorId: interlocutorId,
+                page: page
+            });
+            this.socket.on('get-messages-success', (messages) => {
+                console.log(messages);
+                this.setState({
+                    messagesArray: [...messages.messages.messages],
+                    interlocutorIdAfterClickOnChat: interlocutorId
+                });
+            });
+        }
+    };
+
+
+    sendMessage = async (interlocutorId, messageText) => {
+        this.setState({interlocutorIdAfterClickOnChat: interlocutorId});
+        this.socket.emit('send-message', {
+            token: localStorage.getItem('token'),
+            interlocutorId: interlocutorId,
+            body: messageText
+        });
+        this.socket.on('send-message-success', (messages) => {
+            // console.log(data);
+            this.setState({messagesArray: [...messages.messages.messages]});
+        });
+    };
+
     render() {
         return (
+
             <div className={css.Messager}>
 
                 <div className={css.titleMessager}>Messager</div>
@@ -72,7 +94,10 @@ export class Messager extends React.Component {
                                                               getUser={this.getUser}
 
                     /></div>
-                    <div className={css.ChatsWindow}><ChatsWindow messagesArray={this.state.messagesArray}/></div>
+                    <div className={css.ChatsWindow}><ChatsWindow messagesArray={this.state.messagesArray}
+                                                                  sendMessage={this.sendMessage}
+                                                                  interlocutorIdAfterClickOnChat={this.state.interlocutorIdAfterClickOnChat}/>
+                    </div>
                 </div>
 
             </div>

@@ -31,7 +31,9 @@ class ChatsWindow extends React.Component {
                     <MessagesWindow messageArray={this.state.messageArray}/>
                 </div>
                 <div className={css.FormSend}>
-                    <FormSend addNewMessage={this.addNewMessage.bind(this)}/>
+                    <FormSend sendMessage={this.props.sendMessage}
+                              interlocutorIdAfterClickOnChat={this.props.interlocutorIdAfterClickOnChat}
+                              addNewMessage={this.addNewMessage}/>
                 </div>
             </div>
         )

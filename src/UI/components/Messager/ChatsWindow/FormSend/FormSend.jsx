@@ -11,7 +11,8 @@ export class FormSend extends React.Component {
     };
 
     onKeyPress = (e) => {
-        if (e.key === 'Enter') this.props.addNewMessage(this.state.areaText)
+        if (e.key === 'Enter') this.props.sendMessage(this.props.interlocutorIdAfterClickOnChat, this.state.areaText);
+        console.log(this.props.interlocutorIdAfterClickOnChat);
     };
 
     render() {
