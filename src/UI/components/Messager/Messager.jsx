@@ -77,7 +77,7 @@ export class Messager extends React.Component {
         await this.socket.on('send-message-success', (messages) => {
             console.log(`qqqqqqqqqq`);
             console.log(messages.message);
-            this.setState({messagesArray: [messages.message, ...this.state.messagesArray]});
+            this.setState({messagesArray: [...this.state.messagesArray, messages.message]});
         });
     };
 
